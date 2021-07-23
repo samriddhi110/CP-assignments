@@ -7,7 +7,27 @@ struct user{
     char phone[14];
     float money;
 };
+struct user user1;
 void menu();
+
+void list (){
+    FILE *info,*listall;
+    listall= fopen ("list.txt","a");
+    if (listall == NULL)
+    {
+        fprintf(stderr, "\nError opening file\n");
+        exit (1);
+    }
+    info= fopen ("userinfo.txt","r");
+    fscanf(info,"%d %s %s %s %f",&user1.accountno, user1.name,user1.address,user1.phone,&user1.money);
+    fprintf(listall,"%d\n",user1.accountno);
+    fprintf(listall,"%s\n",user1.name);
+    fprintf(listall,"%s\n",user1.address);
+    fprintf(listall,"%s\n",user1.phone);
+    fprintf(listall,"%f\n",user1.money);
+    fclose(listall);
+}
+
 void createaccount(){
     FILE *info;
     info = fopen ("userinfo.txt","w");
@@ -18,7 +38,6 @@ void createaccount(){
     }
     
     int exit_menu;
-    struct user user1;
     printf("Account number:\n");
     scanf("%d",&user1.accountno);
     
@@ -40,18 +59,29 @@ void createaccount(){
     fprintf(info,"%s\n",user1.phone);
     fprintf(info,"%f\n",user1.money);
     fclose(info);
+    list();
     printf("\nAccount created successfully\n");
+    while(exit_menu!= 0 ||exit_menu!= 1){
     printf("Enter 1 to go to the main menu and 0 to exit:\n");
     scanf("%d",&exit_menu);
-     if (exit_menu==1)
-    menu();
-     
-    else if(exit_menu==0)
+    switch(exit_menu)
+    {
+        case 1:
+        menu();
+        break; 
+        case 0:
         exit(0);
+        break;
+        default:
+        printf("try again\n");
+        break;
+    }
+    }
+
+
 }
 
 void withdraw(){
-    struct user user1;
     int account;
     float moneywithdrawn;
     int exit_menu;
@@ -81,16 +111,22 @@ void withdraw(){
    rename("newinfo.txt","userinfo.txt");
     printf("\nEnter 1 to go to the main menu and 0 to exit:\n");
     scanf("%d",&exit_menu);
-     if (exit_menu==1)
-    menu();
-     
-    else if(exit_menu==0)
+    switch(exit_menu)
+    {
+        case 1:
+        menu();
+        break; 
+        case 0:
         exit(0);
+        break;
+        default:
+        printf("try again\n");
+        break;
+    }
 }
 
 void deposit(){
     
-    struct user user1;
     int account;
     float deposit;
     int exit_menu;
@@ -116,18 +152,24 @@ void deposit(){
    rename("newinfo.txt","userinfo.txt");
     printf("\nEnter 1 to go to the main menu and 0 to exit:\n");
     scanf("%d",&exit_menu);
-     if (exit_menu==1)
-    menu();
-     
-    else if(exit_menu==0)
+   switch(exit_menu)
+    {
+        case 1:
+        menu();
+        break; 
+        case 0:
         exit(0);
+        break;
+        default:
+        printf("try again\n");
+        break;
+    }
 }
 
 
 void display()
 {
-    
-struct user user1;
+
 int exit_menu,account;
     FILE *view;
     view = fopen("userinfo.txt","r");
@@ -148,17 +190,23 @@ int exit_menu,account;
     }
     printf("\nEnter 1 to go to the main menu and 0 to exit:\n");
     scanf("%d",&exit_menu);
-     if (exit_menu==1)
-    menu();
-     
-    else if(exit_menu==0)
+    switch(exit_menu)
+    {
+        case 1:
+        menu();
+        break; 
+        case 0:
         exit(0);
+        break;
+        default:
+        printf("try again\n");
+        break;
+    }
     
 }
 void delete()
 {
     
-struct user user1;
     FILE *old,*newrec;
     int account,n=0;
     old = fopen("userinfo.txt","r");
@@ -180,11 +228,18 @@ struct user user1;
    rename("delete.txt","userinfo.txt");
     printf("\nEnter 1 to go to the main menu and 0 to exit:\n");
     scanf("%d",&exit_menu);
-     if (exit_menu==1)
-    menu();
-     
-    else if(exit_menu==0)
+   switch(exit_menu)
+    {
+        case 1:
+        menu();
+        break; 
+        case 0:
         exit(0);
+        break;
+        default:
+        printf("try again\n");
+        break;
+    }
     }  
 
 void menu(){
